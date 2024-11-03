@@ -1,6 +1,7 @@
 import streamlit as st
 import numpy as np
 from scipy.stats import norm, poisson, expon
+import matplotlib.pyplot as plt
 
 # Setup
 st.title("Distribution Visualiser")
@@ -30,3 +31,13 @@ elif dist_choice == "Exponential":
     x = np.linspace(0, 10, 1000)
     y = expon.pdf(x, scale=1/rate)
     st.write(f"### Exponential distribution with λ={rate}")
+
+# Plot the distribution
+fig, ax = plt.subplots()
+ax.plot(x, y, label=dist_choice)
+ax.fill_between(x, y, alpha=0.2)
+ax.set_xlabel("x")
+ax.set_ylabel("Probability Density")
+ax.legend()
+st.pyplot(fig)
+
