@@ -18,3 +18,10 @@ if dist_choice == "Normal":
     x = np.linspace(mean - 4*std_dev, mean + 4*std_dev, 1000)
     y = norm.pdf(x, mean, std_dev)
     st.write(f"### Normal distribution with μ={mean} and σ={std_dev}")
+elif dist_choice == "Poisson":
+    st.write("## Poisson Distribution Parameters")
+    mean = st.sidebar.slider("Lambda()", 1, 20, 5)
+    x = np.arrange(0, 30)
+    y = poisson.pmf(x, mean)
+    st.write(f"### Poisson distribution with ={mean}")
+    
