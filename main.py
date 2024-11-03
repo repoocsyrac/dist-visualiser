@@ -16,7 +16,7 @@ if dist_choice == "Normal":
     st.sidebar.write("## Normal Distribution Parameters")
     mean = st.sidebar.slider("Mean (μ)", -10.0, 10.0, 0.0)
     std_dev = st.sidebar.slider("Standard Deviation (σ)", 0.1, 5.0, 1.0)
-    x = np.linspace(mean - 4*std_dev, mean + 4*std_dev, 1000)
+    x = np.linspace(-15, 15, 1000)
     y = norm.pdf(x, mean, std_dev)
     st.write(f"### Normal distribution with μ={mean} and σ={std_dev}")
 elif dist_choice == "Poisson":
@@ -34,8 +34,13 @@ elif dist_choice == "Exponential":
 
 # Plot the distribution
 fig, ax = plt.subplots()
-ax.plot(x, y, label=dist_choice)
-ax.fill_between(x, y, alpha=0.2)
+
+if dist_choice in ["Normal", "Exponential"]:
+    ax.plot(x, y, label=dist_choice)
+    ax.fill_between(x, y, alpha=0.2)
+else:
+    ax.bar(x, y, label=dist_choice, alpha=0.6)
+
 ax.set_xlabel("x")
 ax.set_ylabel("Probability Density")
 ax.legend()
